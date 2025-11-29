@@ -1,0 +1,430 @@
+/* General */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  margin: 0;
+  color: #222;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* === FORM ELEMENT RESET === */
+.customer-dashboard input,
+.customer-dashboard select,
+.customer-dashboard textarea
+{
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+:root {
+  --primary: #2d66f7;
+  --muted: #64748b;
+  --accent: #ffb400;
+  --bg: #ffffff;
+  --card-shadow: rgba(2,6,23,0.06);
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 8%;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(238, 236, 236, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ffb400;
+}
+
+.navbar button {
+  background: #2d66f7;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.navbar button:hover {
+  background: #204ed8;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 110px 6% 40px;
+  background-color: #fff;
+  gap: 48px;
+}
+
+.hero-text {
+  max-width: 52%;
+}
+
+.hero-text h1 {
+  font-size: 3.6rem;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.hero-text p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.hero-image img {
+  width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+}
+.hero-image {
+  position: relative;
+  width: 420px;
+}
+
+.hero-image::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  bottom: -10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  background: rgba(45,102,247,0.06);
+  z-index: 0;
+}
+
+/* Search Bar */
+.search-wrapper {
+  width: 86%;
+  margin: 48px auto 56px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #ffffff; /* changed to white as requested */
+  box-shadow: 0 6px 24px rgba(2,6,23,0.04); /* slightly stronger shadow to separate from page */
+  border: 1px solid rgba(15,23,36,0.04);
+}
+
+.search-bar {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 4px;
+}
+
+.search-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: #fff;
+  border-radius: 12px;
+  min-width: 200px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.search-icon { 
+  font-size: 1.05rem; 
+  color: #000; 
+}
+
+/* Room type specific styles */
+.search-item.room-type {
+  background: #fff;
+}
+
+.search-item.room-type select {
+  font-weight: 500;
+}
+
+.search-item.room-type .selected-option {
+  background: #ffb400;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.search-item input,
+.search-item select {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  cursor: pointer;
+  appearance: none;
+  padding-right: 24px;
+  width: 100%;
+}
+
+.search-item input::placeholder {
+  color: #666;
+}
+
+.search-icon {
+  color: #666;
+  font-size: 1.1rem;
+  min-width: 20px;
+}
+
+/* Style for the room type option */
+.search-item select option[value="RoomType"] {
+  background-color: #ffb400;
+  color: #000;
+}
+
+/* Custom dropdown arrow */
+.search-item select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0px center;
+  background-size: 16px;
+}
+
+/* fake placeholder overlay for inputs that don't support placeholders visually */
+.search-item .fake-placeholder {
+  position: absolute;
+  left: 46px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #799dcf;
+  pointer-events: none;
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+/* hide when input has value or when focused */
+.search-item[data-filled="true"] .fake-placeholder,
+.search-item:focus-within .fake-placeholder {
+  opacity: 0;
+  transform: translateY(-60%);
+}
+
+.search-item .right-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.95;
+}
+
+.search-item .date-input {
+  /* ensure native date text isn't overlapped too much */
+  padding-right: 34px;
+}
+
+.search-item input::placeholder { color: #94a3b8; }
+
+.search-btn {
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.15);
+}
+
+.search-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 60px rgba(45,102,247,0.14); }
+.search-btn:hover { transform: translateY(-2px); }
+.search-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.search-error {
+  color: #dc2626;
+  text-align: center;
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+
+/* Rooms Section */
+.rooms-section {
+  width: 86%;
+  margin: 0 auto 60px;
+}
+
+.rooms-section h2 {
+  margin-bottom: 25px;
+  color: #222;
+  margin-bottom: 22px;
+  color: #0f1724;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.rooms-section h2 span {
+  color: #ffb400;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+/* Room Card */
+.room-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 16px;
+  background-color: #fff;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.room-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  height: 200px;
+  display: block;
+}
+
+.room-card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  color: #fff;
+  padding: 18px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.room-card-info h4 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.room-card-info p {
+  margin: 3px 0 0;
+  font-size: 0.9rem;
+}
+
+.room-price {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #2d66f7;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 10px;
+  top: 12px;
+  right: 12px;
+  background: rgba(255,255,255,0.9);
+  color: #0b1220;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.08);
+  font-size: 0.9rem;
+}
+
+/* Footer */
+.site-footer {
+  background: #fff;
+  padding: 60px 0 0;
+  color: #666;
+  border-top: 1px solid #f0f0f0;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.footer-brand {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.footer-brand h2 {
+  font-size: 2rem;
+  color: #333;
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+.footer-brand p {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footer-copyright {
+  background: #4361ee;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+.footer-copyright p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .hero { flex-direction: column-reverse; padding: 40px 6% 20px; }
+  .hero-text { max-width: 100%; text-align: left; }
+  .hero-image { width: 320px; margin-bottom: 18px; }
+  .rooms-grid { grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); }
+}
+
+@media (max-width: 520px) {
+  .search-wrapper { width: 94%; }
+  .search-item { min-width: 120px; padding: 10px 12px; }
+  .hero-image { width: 100%; }
+  .hero-image img { width: 100%; height: 220px; }
+  .hero-text h1 { font-size: 2rem; }
+}
+ 

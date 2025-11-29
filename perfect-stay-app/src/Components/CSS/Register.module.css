@@ -1,0 +1,136 @@
+.container {
+  min-height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8bHV4dXJ5JTIwaG90ZWwlMjBwb29sfGVufDB8fHx8fDE3NjQzMTM0MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+  position: relative;
+}
+
+
+/* Back Button */
+.backBtn {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: #ffffff;
+  color: #0f4c81;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.backBtn:hover {
+  background: #0f4c81;
+  color: #ffffff;
+  transform: translateX(-2px);
+}
+
+.content {
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+.formWrapper {
+  background: #ffffff;
+  width: 100%;
+  border-radius: 18px;
+  padding: 42px 40px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* ✅ only REAL shadow */
+  position: relative;
+}
+
+/* EVERYTHING BELOW STAYS THE SAME */
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  color: #0f4c81;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-top: 6px;
+  margin-bottom: 28px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f4c81;
+  margin-bottom: 6px;
+}
+
+.group input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  transition: border 0.2s;
+}
+
+.group input:focus {
+  outline: none;
+  border-color: #1abc9c;
+}
+
+.loginBtn {
+  width: 100%;
+  background: linear-gradient(to right, #2563eb, #16a34a);
+  border: none;
+  color: #ffffff;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.25s ease;
+}
+
+.loginBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4);
+}
+
+.linkText {
+  text-align: center;
+  margin-top: 18px;
+  color: #374151;
+}
+
+.linkText a {
+  color: #0f4c81;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.linkText a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,37 @@
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  color: #dc2626; /* red-600 */
+  margin-right: 8px;
+}
+
+.title {
+  font-weight: 700;
+  color: #111827; /* gray-900 */
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #4b5563; /* gray-600 */
+  margin-bottom: 12px;
+}
+
+.address {
+  font-size: 12px;
+  color: #6b7280; /* gray-500 */
+  line-height: 1.5;
+}

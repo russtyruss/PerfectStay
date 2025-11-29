@@ -1,0 +1,111 @@
+.page {
+  min-height: 100vh;
+  background: #f3f4f6;
+  padding: 30px;
+}
+
+.loading {
+  padding: 30px;
+  font-weight: 600;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.backBtn:hover {
+  text-decoration: underline;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2933;
+  margin-bottom: 20px;
+}
+
+.empty {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  color: #6b7280;
+}
+
+.tableContainer {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table thead {
+  background: #f9fafb;
+}
+
+.table th {
+  padding: 14px;
+  text-align: left;
+  font-weight: 700;
+  color: #374151;
+}
+
+.table td {
+  padding: 14px;
+  color: #374151;
+  border-top: 1px solid #e5e7eb;
+}
+
+.table tbody tr:hover {
+  background: #f3f4f6;
+}
+
+.code {
+  font-family: monospace;
+  font-size: 12px;
+  color: #2563eb;
+}
+
+.nights {
+  text-align: center;
+  font-weight: 700;
+}
+
+.price {
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.confirmed {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.cancelled {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.pending {
+  background: #fef3c7;
+  color: #b45309;
+}

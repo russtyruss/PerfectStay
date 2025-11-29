@@ -1,0 +1,88 @@
+/* ============================
+   PAGE WRAPPER
+============================ */
+.page {
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* ============================
+   NAVBAR
+============================ */
+.header {
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.navContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ============================
+   LOGO
+============================ */
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.logoBlue {
+  color: #2563eb;
+}
+
+.logoBlack {
+  color: #000000;
+}
+
+/* ============================
+   NAV LINKS
+============================ */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-weight: 500;
+}
+
+.navLink {
+  color: #000000;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: #2563eb;
+}
+
+/* ============================
+   LOGOUT BUTTON
+============================ */
+.logoutBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(to right, #2563eb, #16a34a);
+  transition: opacity 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.logoutBtn:hover {
+  opacity: 0.9;
+}
+
+/* ============================
+   OUTLET
+============================ */
+.content {
+  padding: 1.5rem;
+}

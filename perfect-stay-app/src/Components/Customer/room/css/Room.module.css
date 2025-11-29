@@ -1,0 +1,160 @@
+/* ============================
+   PAGE
+============================ */
+.page {
+  min-height: 100vh;
+  background-color: #f9fafb; /* bg-gray-50 */
+  padding-top: 1.5rem; /* pt-6 */
+}
+
+.container {
+  max-width: 72rem; /* max-w-6xl */
+  margin: 0 auto;
+  padding: 2.5rem 1rem; /* px-4 py-10 */
+}
+
+/* ============================
+   BREADCRUMB + TITLE
+============================ */
+.breadcrumbWrapper {
+  margin-bottom: 2.5rem; /* mb-10 */
+}
+
+.breadcrumb {
+  font-size: 0.875rem; /* text-sm */
+  color: #6b7280; /* text-gray-500 */
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.breadcrumbActive {
+  color: #111827;
+  font-weight: 600;
+}
+
+.title {
+  font-size: 2.25rem; /* text-4xl */
+  font-weight: 800; /* font-extrabold */
+  color: #111827;
+}
+
+.address {
+  color: #4b5563;
+  font-size: 1.125rem; /* text-lg */
+}
+
+/* ============================
+   HERO SECTION
+============================ */
+.heroSection {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem; /* gap-10 */
+  margin-bottom: 3rem; /* mb-12 */
+}
+
+@media (min-width: 1024px) {
+  .heroSection {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.heroImageWrapper {
+  position: relative;
+}
+
+.heroImage {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  border-radius: 1rem; /* rounded-2xl */
+  box-shadow: 0 20px 25px rgba(0,0,0,0.1); /* shadow-xl */
+}
+
+.priceBadge {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(to right, #2563eb, #16a34a);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+}
+
+/* ============================
+   ABOUT
+============================ */
+.aboutSection {
+  margin-bottom: 3rem; /* mb-12 */
+}
+
+.sectionTitle {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700;
+  color: #1f2937; /* text-gray-800 */
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+/* ============================
+   ROOMS GRID
+============================ */
+.roomsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem; /* gap-6 */
+  margin-bottom: 5rem; /* mb-20 */
+}
+
+@media (min-width: 640px) {
+  .roomsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .roomsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================
+   ROOM SELECT BUTTON STYLE
+============================ */
+.roomBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+  color: #374151;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none; /* ✅ no border */
+}
+
+/* ✅ ACTIVE = stronger shadow, still no border */
+.roomBtnActive {
+  background-color: #ffffff;
+  color: #111827;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18); /* stronger depth */
+  transform: translateY(-1px); /* subtle lift */
+}
+
+
+/* Loading / Error messages */
+.loading {
+  padding: 2.5rem; /* Tailwind p-10 */
+}
+
+.error {
+  padding: 2.5rem; /* Tailwind p-10 */
+  color: #ef4444;  /* Tailwind text-red-500 */
+}
+

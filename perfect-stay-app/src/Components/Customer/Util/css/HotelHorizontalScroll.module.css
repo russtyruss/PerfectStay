@@ -1,0 +1,56 @@
+/* ============================
+   WRAPPER
+============================ */
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* ============================
+   ARROW BUTTONS
+============================ */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  background-color: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,.1);
+  padding: 0.5rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
+/* ============================
+   SCROLL ROW
+============================ */
+.scrollRow {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 3rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollRow::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* ============================
+   CARD WRAPPER
+============================ */
+.cardWrapper {
+  width: 18rem; /* w-72 */
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}

@@ -1,0 +1,62 @@
+/* ============================
+   SECTION
+============================ */
+.section {
+  width: 100%;
+  padding: 2.5rem 1.5rem; /* px-6 py-10 */
+}
+
+/* ============================
+   TITLE
+============================ */
+.title {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+.gradient {
+  background: linear-gradient(to right, #2563eb, #16a34a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============================
+   STATUS TEXT
+============================ */
+.loading {
+  color: #6b7280;
+}
+
+.error {
+  color: #ef4444;
+}
+
+.empty {
+  color: #6b7280;
+  grid-column: 1 / -1;
+}
+
+/* ============================
+   GRID
+============================ */
+.grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

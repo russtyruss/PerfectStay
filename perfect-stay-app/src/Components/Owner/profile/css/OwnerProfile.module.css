@@ -1,0 +1,241 @@
+/* PAGE */
+.page {
+  min-height: 100vh;
+  background: white;
+  padding: 3rem 1rem;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.iconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(to right, #2563eb, #16a34a);
+  border-radius: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.headerTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.gradientText {
+  background: linear-gradient(to right, #2563eb, #16a34a);
+  -webkit-background-clip: text; /* Safari + Chrome */
+  background-clip: text;         /* Standard */
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.headerSubtitle {
+  font-size: 1.25rem;
+  color: #6b7280;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border-radius: 1.5rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+/* BANNER */
+.banner {
+  background: linear-gradient(to right, #2563eb, #16a34a);
+  padding: 3rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* AVATAR */
+.avatarWrapper {
+  width: 96px;
+  height: 96px;
+  background: white;
+  border-radius: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.bannerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: white;
+}
+
+.email {
+  color: #dbeafe;
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+/* ACTION BUTTONS */
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.actionBtnBlue {
+  background: white;
+  color: #2563eb;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.actionBtnGreen {
+  background: white;
+  color: #16a34a;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* FORM */
+.form {
+  padding: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.full {
+  grid-column: span 2;
+}
+
+.label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  background: #f9fafb;
+  outline: none;
+}
+
+.input:disabled {
+  background: #f3f4f6;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+/* FOOTER BUTTONS */
+.formActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cancelBtn {
+  flex: 1;
+  border: 2px solid #d1d5db;
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+
+.saveBtn {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  color: white;
+  font-weight: 600;
+  background: linear-gradient(to right, #2563eb, #16a34a);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* MODAL */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.modal {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.modalActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.modalCancel {
+  flex: 1;
+  border: 1px solid #d1d5db;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+}
+
+.modalSave {
+  flex: 1;
+  background: #2563eb;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+}

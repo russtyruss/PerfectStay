@@ -1,0 +1,379 @@
+/* ===== PAGE LAYOUT ===== */
+.page {
+  min-height: 100vh;
+  background: #ffffff;
+  padding: 48px 16px;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+/* ===== BACK BUTTON ===== */
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+  padding: 8px 12px;
+  font-weight: 600;
+  color: #ffffff;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(to right, #2563eb, #16a34a);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: opacity 0.2s ease;
+}
+
+.backBtn:hover {
+  opacity: 0.9;
+}
+
+/* ===== HEADER ===== */
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.gradientText {
+  background: linear-gradient(to right, #2563eb, #16a34a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #4b5563;
+}
+
+/* ===== GRID ===== */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.leftColumn > * {
+  margin-bottom: 24px;
+}
+
+.leftColumn > *:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== CARD BASE ===== */
+.card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 20px 25px rgba(0,0,0,0.08);
+}
+
+/* ===== STATUS CARD ===== */
+.statusCard {
+  border: 2px solid #fde68a;
+  text-align: center;
+}
+
+.statusLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b5563;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* ===== CARD HEADERS ===== */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.iconBox {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconBlue {
+  background: linear-gradient(to right, #2563eb, #16a34a);
+}
+
+.iconGreen {
+  background: linear-gradient(to right, #22c55e, #0d9488);
+}
+
+.iconPink {
+  background: linear-gradient(to right, #16a34a, #db2777);
+}
+
+.headerText {
+  margin-left: 16px;
+}
+
+.cardTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.cardSubtitle {
+  color: #4b5563;
+  margin-top: 2px;
+}
+
+/* ===== ROOM INFO BOX ===== */
+.roomBox {
+  background: linear-gradient(to right, #eff6ff, #ecfdf5);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.roomRow {
+  margin-bottom: 16px;
+}
+
+.label {
+  color: #374151;
+  font-weight: 500;
+}
+
+.value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.price {
+  color: #2563eb;
+}
+
+/* ===== DATES ===== */
+.dateColumn > * {
+  margin-bottom: 16px;
+}
+
+.dateColumn > *:last-child {
+  margin-bottom: 0;
+}
+
+.dateBox {
+  border-radius: 12px;
+  padding: 20px;
+  border-left: 4px solid;
+}
+
+.checkIn {
+  background: #ecfdf5;
+  border-color: #22c55e;
+}
+
+.checkOut {
+  background: #fff7ed;
+  border-color: #fb923c;
+}
+
+.nights {
+  background: #ecfdf5;
+  border-color: #22c55e;
+}
+
+.dateLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+.dateValue {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* ===== GUEST INFO ===== */
+.guestRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.guestTextSmall {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.guestText {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ===== PAYMENT CARD ===== */
+.paymentCard {
+  border: 1px solid #e5e7eb;
+  position: sticky;
+  top: 16px;
+}
+
+.paymentHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.paymentIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(to right, #22c55e, #10b981);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paymentTitle {
+  margin-left: 12px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* ===== PAYMENT ROWS ===== */
+.summary > * {
+  margin-bottom: 16px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.summaryRow:last-child {
+  border-bottom: none;
+}
+
+.summaryLabel {
+  color: #4b5563;
+}
+
+.summaryValue {
+  font-weight: 600;
+  color: #111827;
+}
+
+.included {
+  color: #16a34a;
+}
+
+/* ===== TOTAL BOX ===== */
+.totalBox {
+  background: linear-gradient(to right, #ecfdf5, #d1fae5);
+  border: 2px solid #bbf7d0;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.totalLabel {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.totalPrice {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(to right, #16a34a, #10b981);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ===== BUTTONS ===== */
+.primaryBtn {
+  width: 100%;
+  padding: 16px 0;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(to right, #2563eb, #16a34a);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.primaryBtn:hover {
+  opacity: 0.9;
+}
+
+/* ===== FOOTER BUTTON ===== */
+.footer {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cancelBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  background: white;
+  border: 2px solid #d1d5db;
+  color: #1f2937;
+  font-weight: 600;
+  box-shadow: 0 10px 15px rgba(0,0,0,0.08);
+  cursor: pointer;
+}
+
+.cancelBtn:hover {
+  background: #f9fafb;
+}
