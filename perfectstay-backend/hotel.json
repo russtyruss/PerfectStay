@@ -1,0 +1,216 @@
+{
+  "info": {
+    "name": "PerfectStay Full API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Hotels - CRUD & seed",
+      "item": [
+        {
+          "name": "Create Hotel 1 - Shangri-La Mactan",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/hotels/create",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Shangri-La Mactan Resort\",\n  \"description\": \"Luxury beach resort located on Mactan Island.\",\n  \"address\": \"Punta Engaño, Lapu-Lapu City, Cebu\",\n  \"rating\": 4.9,\n  \"imageUrl\": \"https://example.com/shangri-la.jpg\",\n  \"hotelOwner\": { \"id\": 1 }\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Hotel 2 - Waterfront Cebu City Hotel",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/hotels/create",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Waterfront Cebu City Hotel & Casino\",\n  \"description\": \"City-center hotel with casino and convention facilities.\",\n  \"address\": \"F. Cabahug St, Cebu City\",\n  \"rating\": 4.4,\n  \"imageUrl\": \"https://example.com/waterfront.jpg\",\n  \"hotelOwner\": { \"id\": 1 }\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Hotel 3 - Seda Central Bloc Cebu",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/hotels/create",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Seda Central Bloc Cebu\",\n  \"description\": \"Modern hotel in the heart of Cebu Business Park.\",\n  \"address\": \"Salinas Drive, Cebu City\",\n  \"rating\": 4.6,\n  \"imageUrl\": \"https://example.com/seda.jpg\",\n  \"hotelOwner\": { \"id\": 1 }\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Hotels",
+          "request": { "method": "GET", "url": "http://localhost:8080/api/hotels" }
+        }
+      ]
+    },
+    {
+      "name": "Rooms - CRUD & seed (3 rooms per hotel)",
+      "item": [
+        {
+          "name": "Create Room - Shangri-La - Deluxe 101",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/rooms/create/1",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": \"101\",\n  \"roomType\": \"Deluxe\",\n  \"description\": \"Cozy deluxe room with partial sea view.\",\n  \"pricePerNight\": 8000,\n  \"capacity\": 2,\n  \"isAvailable\": true,\n  \"images\": [\n    {\"imageUrl\": \"https://example.com/shangri-la/r101-1.jpg\"},\n    {\"imageUrl\": \"https://example.com/shangri-la/r101-2.jpg\"},\n    {\"imageUrl\": \"https://example.com/shangri-la/r101-3.jpg\"}\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Room - Shangri-La - Premier Suite 201",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/rooms/create/1",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": \"201\",\n  \"roomType\": \"Premier Suite\",\n  \"description\": \"Large suite with living area and sea view.\",\n  \"pricePerNight\": 15000,\n  \"capacity\": 4,\n  \"isAvailable\": true,\n  \"images\": [\n    {\"imageUrl\": \"https://example.com/shangri-la/r201-1.jpg\"},\n    {\"imageUrl\": \"https://example.com/shangri-la/r201-2.jpg\"},\n    {\"imageUrl\": \"https://example.com/shangri-la/r201-3.jpg\"}\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Room - Shangri-La - Family 301",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/rooms/create/1",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": \"301\",\n  \"roomType\": \"Family Room\",\n  \"description\": \"Spacious family room with two queen beds.\",\n  \"pricePerNight\": 12000,\n  \"capacity\": 5,\n  \"isAvailable\": true,\n  \"images\": [\n    {\"imageUrl\": \"https://example.com/shangri-la/r301-1.jpg\"},\n    {\"imageUrl\": \"https://example.com/shangri-la/r301-2.jpg\"},\n    {\"imageUrl\": \"https://example.com/shangri-la/r301-3.jpg\"}\n  ]\n}"
+            }
+          }
+        },
+
+        {
+          "name": "Create Room - Waterfront - Deluxe 101",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/rooms/create/2",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": \"101\",\n  \"roomType\": \"Deluxe\",\n  \"description\": \"City view deluxe room.\",\n  \"pricePerNight\": 4500,\n  \"capacity\": 2,\n  \"isAvailable\": true,\n  \"images\": [\n    {\"imageUrl\": \"https://example.com/waterfront/r101-1.jpg\"},\n    {\"imageUrl\": \"https://example.com/waterfront/r101-2.jpg\"},\n    {\"imageUrl\": \"https://example.com/waterfront/r101-3.jpg\"}\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Room - Waterfront - Premier 201",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/rooms/create/2",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": \"201\",\n  \"roomType\": \"Premier Suite\",\n  \"description\": \"Executive suite with lounge area.\",\n  \"pricePerNight\": 8500,\n  \"capacity\": 3,\n  \"isAvailable\": true,\n  \"images\": [\n    {\"imageUrl\": \"https://example.com/waterfront/r201-1.jpg\"},\n    {\"imageUrl\": \"https://example.com/waterfront/r201-2.jpg\"},\n    {\"imageUrl\": \"https://example.com/waterfront/r201-3.jpg\"}\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Room - Waterfront - Family 301",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/rooms/create/2",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": \"301\",\n  \"roomType\": \"Family Room\",\n  \"description\": \"Two-bedroom family suite.\",\n  \"pricePerNight\": 7000,\n  \"capacity\": 5,\n  \"isAvailable\": true,\n  \"images\": [\n    {\"imageUrl\": \"https://example.com/waterfront/r301-1.jpg\"},\n    {\"imageUrl\": \"https://example.com/waterfront/r301-2.jpg\"},\n    {\"imageUrl\": \"https://example.com/waterfront/r301-3.jpg\"}\n  ]\n}"
+            }
+          }
+        },
+
+        {
+          "name": "Create Room - Seda - Deluxe 101",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/rooms/create/3",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": \"101\",\n  \"roomType\": \"Deluxe\",\n  \"description\": \"Modern deluxe room in city center.\",\n  \"pricePerNight\": 5000,\n  \"capacity\": 2,\n  \"isAvailable\": true,\n  \"images\": [\n    {\"imageUrl\": \"https://example.com/seda/r101-1.jpg\"},\n    {\"imageUrl\": \"https://example.com/seda/r101-2.jpg\"},\n    {\"imageUrl\": \"https://example.com/seda/r101-3.jpg\"}\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Room - Seda - Premier 201",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/rooms/create/3",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": \"201\",\n  \"roomType\": \"Premier Suite\",\n  \"description\": \"Premium suite with city skyline view.\",\n  \"pricePerNight\": 9500,\n  \"capacity\": 3,\n  \"isAvailable\": true,\n  \"images\": [\n    {\"imageUrl\": \"https://example.com/seda/r201-1.jpg\"},\n    {\"imageUrl\": \"https://example.com/seda/r201-2.jpg\"},\n    {\"imageUrl\": \"https://example.com/seda/r201-3.jpg\"}\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Room - Seda - Family 301",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/rooms/create/3",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": \"301\",\n  \"roomType\": \"Family Room\",\n  \"description\": \"Family-friendly suite with living area.\",\n  \"pricePerNight\": 8000,\n  \"capacity\": 5,\n  \"isAvailable\": true,\n  \"images\": [\n    {\"imageUrl\": \"https://example.com/seda/r301-1.jpg\"},\n    {\"imageUrl\": \"https://example.com/seda/r301-2.jpg\"},\n    {\"imageUrl\": \"https://example.com/seda/r301-3.jpg\"}\n  ]\n}"
+            }
+          }
+        },
+
+        {
+          "name": "Get All Rooms",
+          "request": { "method": "GET", "url": "http://localhost:8080/api/rooms" }
+        }
+      ]
+    },
+
+    {
+      "name": "RoomImages - CRUD & per-room",
+      "item": [
+        {
+          "name": "Create Image for Room (example) - POST /api/room-images/room/1",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/room-images/room/1",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"imageUrl\": \"https://example.com/manual-add/r1-extra.jpg\"\n}"
+            }
+          }
+        },
+        { "name": "Get All Images", "request": { "method": "GET", "url": "http://localhost:8080/api/room-images" } },
+        { "name": "Get Image by ID", "request": { "method": "GET", "url": "http://localhost:8080/api/room-images/1" } },
+        { "name": "Get Images by Room", "request": { "method": "GET", "url": "http://localhost:8080/api/room-images/room/1" } },
+        {
+          "name": "Update Image",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "http://localhost:8080/api/room-images/1",
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"imageUrl\": \"https://example.com/updated-image.jpg\" }"
+            }
+          }
+        },
+        { "name": "Delete Image", "request": { "method": "DELETE", "url": "http://localhost:8080/api/room-images/1" } },
+        { "name": "Delete All Images for Room", "request": { "method": "DELETE", "url": "http://localhost:8080/api/room-images/room/1" } }
+      ]
+    },
+
+    {
+      "name": "Other helper requests",
+      "item": [
+        { "name": "Get Hotels", "request": { "method": "GET", "url": "http://localhost:8080/api/hotels" } },
+        { "name": "Get Rooms", "request": { "method": "GET", "url": "http://localhost:8080/api/rooms" } }
+      ]
+    }
+  ]
+}
