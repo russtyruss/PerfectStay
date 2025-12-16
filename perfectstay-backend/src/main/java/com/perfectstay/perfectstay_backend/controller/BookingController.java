@@ -29,6 +29,8 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
+    //postman controller methods
+
     @PostMapping
     public Booking createBooking(@RequestBody BookingRequest request) {
         return bookingService.createBooking(request);
@@ -45,6 +47,8 @@ public class BookingController {
     }
 
 
+
+    //used controllers in frontend
     @GetMapping("/customer/{customerId}")
     public List<Booking> getCustomerBookings(@PathVariable Long customerId) {
         return bookingService.getBookingsByCustomer(customerId);

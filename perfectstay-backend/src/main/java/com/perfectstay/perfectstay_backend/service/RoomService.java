@@ -52,37 +52,37 @@ public class RoomService {
     }
 
     //edit room
-@Transactional
-public Room updateRoom(Long roomId, RoomDTO dto, Long ownerId) {
+    @Transactional
+    public Room updateRoom(Long roomId, RoomDTO dto, Long ownerId) {
 
-    Room existingRoom = roomRepository.findById(roomId)
-            .orElseThrow(() -> new RuntimeException("Room not found"));
+        Room existingRoom = roomRepository.findById(roomId)
+                .orElseThrow(() -> new RuntimeException("Room not found"));
 
-    if (!existingRoom.getHotel().getHotelOwner().getId().equals(ownerId)) {
-        throw new RuntimeException("Unauthorized");
-    }
-
-    existingRoom.setRoomType(dto.getRoomType());
-    existingRoom.setDescription(dto.getDescription());
-    existingRoom.setCapacity(dto.getCapacity());
-    existingRoom.setQuantity(dto.getQuantity());
-    existingRoom.setPricePerNight(dto.getPricePerNight());
-    existingRoom.setIsAvailable(dto.getIsAvailable());
-
-    // ✅ SAFE IMAGE REPLACEMENT — THIS IS THE FIX
-    existingRoom.getImages().clear();
-
-    if (dto.getImages() != null && !dto.getImages().isEmpty()) {
-        for (String url : dto.getImages()) {
-            RoomImage img = new RoomImage();
-            img.setImageUrl(url);
-            img.setRoom(existingRoom);
-            existingRoom.getImages().add(img);
+        if (!existingRoom.getHotel().getHotelOwner().getId().equals(ownerId)) {
+            throw new RuntimeException("Unauthorized");
         }
-    }
 
-    return roomRepository.save(existingRoom);
-}
+        existingRoom.setRoomType(dto.getRoomType());
+        existingRoom.setDescription(dto.getDescription());
+        existingRoom.setCapacity(dto.getCapacity());
+        existingRoom.setQuantity(dto.getQuantity());
+        existingRoom.setPricePerNight(dto.getPricePerNight());
+        existingRoom.setIsAvailable(dto.getIsAvailable());
+
+        // ✅ SAFE IMAGE REPLACEMENT — THIS IS THE FIX
+        existingRoom.getImages().clear();
+
+        if (dto.getImages() != null && !dto.getImages().isEmpty()) {
+            for (String url : dto.getImages()) {
+                RoomImage img = new RoomImage();
+                img.setImageUrl(url);
+                img.setRoom(existingRoom);
+                existingRoom.getImages().add(img);
+            }
+        }
+
+        return roomRepository.save(existingRoom);
+    }
 
 
 

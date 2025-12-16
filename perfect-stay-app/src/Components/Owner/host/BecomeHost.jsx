@@ -19,8 +19,12 @@ const BecomeHost = () => {
   const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState('');
 
+  //input change handler
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === "phoneNumber" && !/^\d*$/.test(value)) return;
+
     setFormData(prev => ({ ...prev, [name]: value }));
 
     if (errors[name]) {
@@ -28,36 +32,49 @@ const BecomeHost = () => {
     }
   };
 
-  const validateForm = () => {
-    const newErrors = {};
 
-    if (!formData.fullName.trim()) newErrors.fullName = 'Full Name is required';
+  //validation function
+const validateForm = () => {
+  const newErrors = {};
 
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
-    }
+  if (!formData.fullName.trim()) {
+    newErrors.fullName = 'Full Name is required';
+  }
 
-    if (!formData.phoneNumber.trim()) newErrors.phoneNumber = 'Phone Number is required';
+  if (!formData.email.trim()) {
+    newErrors.email = 'Email is required';
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    newErrors.email = 'Invalid email format';
+  }
 
-    if (!formData.businessName.trim()) newErrors.businessName = 'Business Name is required';
+  // ✅ Phone number validation (numbers only + at least 10 digits)
+  if (!formData.phoneNumber.trim()) {
+    newErrors.phoneNumber = 'Phone Number is required';
+  } else if (formData.phoneNumber.length < 10) {
+    newErrors.phoneNumber = 'Phone Number must be at least 10 digits';
+  }
 
-    if (!formData.businessRegistrationNumber.trim()) {
-      newErrors.businessRegistrationNumber = 'Business Registration Number is required';
-    }
+  if (!formData.businessName.trim()) {
+    newErrors.businessName = 'Business Name is required';
+  }
 
-    if (!formData.password || formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-    }
+  if (!formData.businessRegistrationNumber.trim()) {
+    newErrors.businessRegistrationNumber = 'Business Registration Number is required';
+  }
 
-    if (formData.confirmPassword !== formData.password) {
-      newErrors.confirmPassword = 'Passwords do not match';
-    }
+  if (!formData.password || formData.password.length < 6) {
+    newErrors.password = 'Password must be at least 6 characters';
+  }
 
-    return newErrors;
-  };
+  if (formData.confirmPassword !== formData.password) {
+    newErrors.confirmPassword = 'Passwords do not match';
+  }
 
+  return newErrors;
+};
+
+
+  //handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setServerError('');
@@ -101,6 +118,9 @@ const BecomeHost = () => {
 
   };
 
+
+
+  //return statement
   return (
     <div className={styles.container}>
 

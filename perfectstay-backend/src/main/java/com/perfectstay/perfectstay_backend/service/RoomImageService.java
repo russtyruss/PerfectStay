@@ -20,17 +20,20 @@ public class RoomImageService {
         this.roomRepo = roomRepo;
     }
 
+    //create room image
     public RoomImage create(Long roomId, RoomImage img) {
         Room room = roomRepo.findById(roomId).orElse(null);
         img.setRoom(room);
         return repo.save(img);
     }
 
+    //get images by room id
     public List<RoomImage> getImagesByRoom(Long roomId) {
         return repo.findByRoomId(roomId);
     }
 
 
+    //delete room image
     public boolean delete(Long id) {
         if (!repo.existsById(id)) return false;
         repo.deleteById(id);

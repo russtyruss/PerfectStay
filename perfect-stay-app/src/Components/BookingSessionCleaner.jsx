@@ -17,7 +17,7 @@ export default function BookingSessionCleaner() {
       sessionStorage.removeItem("confirmedBooking");
       sessionStorage.removeItem("checkoutRoom");
 
-      console.log("✅ Booking session cleared:", location.pathname);
+      console.log("Booking session cleared:", location.pathname);
     }
   }, [location.pathname]);
   return null;

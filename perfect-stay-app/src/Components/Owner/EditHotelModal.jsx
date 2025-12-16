@@ -78,6 +78,7 @@ export default function EditHotelModal({ hotelId, ownerId, onClose, onUpdated })
 
         <form onSubmit={handleSubmit} className={styles.form}>
 
+        <p>Hotel Name</p>
           <input
             autoFocus
             name="name"
@@ -88,6 +89,7 @@ export default function EditHotelModal({ hotelId, ownerId, onClose, onUpdated })
             required
           />
 
+        <p>City</p>
           <input
             name="city"
             value={hotel.city}
@@ -97,6 +99,7 @@ export default function EditHotelModal({ hotelId, ownerId, onClose, onUpdated })
             required
           />
 
+        <p>Address</p>
           <input
             name="address"
             value={hotel.address}
@@ -106,6 +109,7 @@ export default function EditHotelModal({ hotelId, ownerId, onClose, onUpdated })
             required
           />
 
+        <p>Description</p>
           <textarea
             name="description"
             value={hotel.description}
@@ -114,6 +118,7 @@ export default function EditHotelModal({ hotelId, ownerId, onClose, onUpdated })
             className={styles.textarea}
           />
 
+        <p>Image URL</p>
           <input
             name="imageUrl"
             value={hotel.imageUrl}

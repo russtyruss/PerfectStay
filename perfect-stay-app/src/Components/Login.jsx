@@ -16,7 +16,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      // Always clear any old session first
+      // clear any old session first
       sessionStorage.clear();
 
       const response = await api.post("/users/login", credentials);

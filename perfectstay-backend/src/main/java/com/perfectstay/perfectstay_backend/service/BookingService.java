@@ -42,6 +42,8 @@ public class BookingService {
     @Autowired
     private PaymentService paymentService;
 
+    @Autowired
+    private EmailService emailService;
 
 
 
@@ -53,23 +55,14 @@ public class BookingService {
 
         int quantity = room.getQuantity();
 
-        // 1️Count overlapping confirmed bookings
-        List<Booking> overlapping =
-                bookingRepository.findOverlappingBookings(roomId, checkInDate, checkOutDate);
-
-        // 2️Count total confirmed bookings
         int totalConfirmed =
-                bookingRepository.countByRoomIdAndBookingStatus(roomId, BookingStatus.CONFIRMED);
+                bookingRepository.countByRoomIdAndBookingStatus(
+                        roomId,
+                        BookingStatus.CONFIRMED
+                );
 
-        // 3️If only 1 quantity → ANY existing confirmed booking blocks the room
-        if (quantity == 1) {
-            return totalConfirmed == 0;  // if any booking exists → unavailable
-        }
-
-        // 4️If quantity > 1 → allow booking only if overlapping < quantity
-        return overlapping.size() < quantity;
+        return totalConfirmed <= quantity;
     }
-
 
 
     //creates a new booking
@@ -84,6 +77,15 @@ public class BookingService {
 
         Room room = roomRepository.findById(req.getRoomId())
                 .orElseThrow(() -> new RuntimeException("Room not found"));
+        
+        int currentQty = room.getQuantity();
+
+        if (currentQty <= 0) {
+            throw new RuntimeException("Room is fully booked");
+        }
+
+        room.setQuantity(currentQty - 1);
+        roomRepository.save(room);
 
         Booking booking = new Booking();
         booking.setCheckInDate(req.getCheckInDate());
@@ -98,7 +100,7 @@ public class BookingService {
         booking.setCustomer(customer);
         booking.setRoom(room);
 
-        // ⭐ ADD LOYALTY POINTS (SAFE NULL HANDLING)
+        // ADD LOYALTY POINTS (SAFE NULL HANDLING)
         int earnedPoints = (int) (req.getTotalPrice() / 100);
 
         booking.setPointsEarned(earnedPoints);
@@ -114,6 +116,9 @@ public class BookingService {
 
         return bookingRepository.save(booking);
     }
+
+
+
 
     //get bookings by customer id
     public List<Booking> getBookingsByCustomer(Long customerId) {
@@ -206,35 +211,43 @@ public class BookingService {
             throw new IllegalStateException("Only pending or confirmed bookings can be cancelled");
         }
 
-            // ================= REFUND LOGIC =================
+        //Refund
+        // refund if booking is confirmed only
+        if (currentStatus == BookingStatus.CONFIRMED) {
 
-    Payment payment = paymentRepository.findByBookingId(bookingId)
-            .orElseThrow(() -> new RuntimeException("No payment found for this booking"));
+            Payment payment = paymentRepository.findByBookingId(bookingId)
+                    .orElseThrow(() -> new RuntimeException("No payment found for this booking"));
 
-    if (payment.getPaymentStatus() == PaymentStatus.PAID) {
+            if (payment.getPaymentStatus() == PaymentStatus.PAID) {
 
-        Wallet wallet = walletRepository.findById(payment.getWalletId())
-                .orElseThrow(() -> new RuntimeException("Wallet not found for refund"));
+                Wallet wallet = walletRepository.findById(payment.getWalletId())
+                        .orElseThrow(() -> new RuntimeException("Wallet not found for refund"));
 
-        // ✅ RETURN MONEY
-        wallet.setBalance(
-                wallet.getBalance().add(
-                        BigDecimal.valueOf(payment.getAmount())
-                )
-        );
-        walletRepository.save(wallet);
+                // retturn money
+                wallet.setBalance(
+                        wallet.getBalance().add(
+                                BigDecimal.valueOf(payment.getAmount())
+                        )
+                );
+                walletRepository.save(wallet);
 
-        // ✅ MARK PAYMENT AS REFUNDED
-        payment.setPaymentStatus(PaymentStatus.REFUNDED);
-        payment.setRefundTransactionId(paymentService.generateTxn());
-        payment.setRefundedAt(LocalDateTime.now());
-        paymentRepository.save(payment);
-    }
+                // MARK PAYMENT AS REFUNDED
+                payment.setPaymentStatus(PaymentStatus.REFUNDED);
+                payment.setRefundTransactionId(paymentService.generateTxn());
+                payment.setRefundedAt(LocalDateTime.now());
+                Payment savedRefund = paymentRepository.save(payment);
+
+                // SEND REFUND EMAIL
+                emailService.sendRefundReceipt(
+                    booking.getCustomer().getEmail(),
+                    savedRefund
+                );
+            }
+        }
 
         booking.setBookingStatus(BookingStatus.CANCELLED);
         bookingRepository.save(booking);
     }
-
 
     //mark completed bookings
     @Transactional
@@ -245,7 +258,7 @@ public class BookingService {
 
         BookingStatus currentStatus = booking.getBookingStatus();
 
-        // ✅ DO NOT TOUCH THESE
+        // DO NOT TOUCH THESE
         if (currentStatus == BookingStatus.CANCELLED ||
             currentStatus == BookingStatus.COMPLETED) {
             return;
@@ -270,7 +283,7 @@ public class BookingService {
             throw new RuntimeException("Booking already cancelled");
         }
 
-        // ✅ Only allow delete for PENDING (failed or unpaid)
+        // Only allow delete for PENDING (failed or unpaid)
         if (booking.getBookingStatus() != BookingStatus.PENDING) {
             throw new RuntimeException("Only pending bookings can be deleted");
         }

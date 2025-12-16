@@ -1,11 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { CheckCircle, Calendar, Home, Mail, Printer, Users, MapPin, Phone, Sparkles } from 'lucide-react';
+import { CheckCircle, Calendar, Home, Printer, Users, MapPin, Phone, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function BookingSuccess({ onNavigate }) {
   const [booking, setBooking] = useState(null);
   const navigate = useNavigate();
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
+    // block back button navigation
+  useEffect(() => {
+    window.history.pushState(null, "", window.location.href);
+
+    const onPopState = () => {
+      navigate("/home/customer-dashboard", { replace: true }); 
+      //  change "/bookings" to your safe page if needed
+    };
+
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+    // eslint-disable-next-line
+  }, []);
+
+// load booking details from session storage
   useEffect(() => {
     const confirmedBooking = sessionStorage.getItem('confirmedBooking');
     if (confirmedBooking) {
@@ -30,6 +46,7 @@ export default function BookingSuccess({ onNavigate }) {
     }
   }, [onNavigate]);
 
+  // Format date utility
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       weekday: 'long',
@@ -39,11 +56,12 @@ export default function BookingSuccess({ onNavigate }) {
     });
   };
 
+
+  // Print confirmation
   const handlePrint = () => {
     window.print();
   };
 
-  const user = JSON.parse(sessionStorage.getItem("user"));
 
   if (!booking) {
     return null;
@@ -78,11 +96,6 @@ export default function BookingSuccess({ onNavigate }) {
               {booking.confirmationCode}
             </p>
 
-            {/* implement sending email later */}
-            <p className="text-green-100 text-sm mt-4 flex items-center justify-center">
-              <Mail className="h-4 w-4 mr-2" />
-              Confirmation sent to {booking.guestEmail}
-            </p>
           </div>
 
           {/* Booking Details */}

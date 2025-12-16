@@ -10,7 +10,7 @@ export default function Recommendation({ hotels = [], loading, error }) {
   return (
     <section className={styles.section}>
       <h2 className={styles.title}>
-        Popular{" "}
+        Recommended{" "}
         <span className={styles.gradient}>Hotels</span>
       </h2>
 

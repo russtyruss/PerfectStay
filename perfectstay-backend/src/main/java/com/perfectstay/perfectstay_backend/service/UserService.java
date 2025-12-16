@@ -7,11 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.perfectstay.perfectstay_backend.dto.ChangePasswordRequest;
 import com.perfectstay.perfectstay_backend.dto.UpdateUserRequest;
-import com.perfectstay.perfectstay_backend.entity.Admin;
 import com.perfectstay.perfectstay_backend.entity.Customer;
 import com.perfectstay.perfectstay_backend.entity.HotelOwner;
 import com.perfectstay.perfectstay_backend.entity.User;
-import com.perfectstay.perfectstay_backend.repository.AdminRepository;
 import com.perfectstay.perfectstay_backend.repository.CustomerRepository;
 import com.perfectstay.perfectstay_backend.repository.HotelOwnerRepository;
 import com.perfectstay.perfectstay_backend.repository.UserRepository;
@@ -22,8 +20,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private AdminRepository adminRepository;
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -43,11 +39,6 @@ public class UserService {
         return customerRepository.save(customer);
     }
 
-    // CREATE ADMIN
-    public Admin createAdmin(Admin admin) {
-        admin.setUserType("ADMIN");
-        return adminRepository.save(admin);
-    }
 
     // CREATE HOTEL OWNER
     public HotelOwner createHotelOwner(HotelOwner owner) {
@@ -55,10 +46,6 @@ public class UserService {
         return hotelOwnerRepository.save(owner);
     }
 
-    // CHILD GETTERS
-    public List<Admin> getAllAdmins() {
-        return adminRepository.findAll();
-    }
 
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
@@ -77,11 +64,6 @@ public class UserService {
     public User getUserById(Long id) {
         return userRepository.findById(id)
                 .orElse(null);
-    }
-
-    //for login
-    public User findByEmailAndPassword(String email, String password) {
-        return userRepository.findByEmailAndPassword(email, password);
     }
 
     //edit profile

@@ -3,15 +3,16 @@
 ============================ */
 .page {
   min-height: 100vh;
-  background-color: #f9fafb; /* bg-gray-50 */
-  padding-top: 1.5rem; /* pt-6 */
+  background-color: #f9fafb;
+  padding-top: 0.25rem;  /* tiny top breathing room */
 }
 
 .container {
-  max-width: 72rem; /* max-w-6xl */
+  max-width: 72rem;
   margin: 0 auto;
-  padding: 2.5rem 1rem; /* px-4 py-10 */
+  padding: 1rem 1rem;   /* enough space to show "Browse All Rooms" */
 }
+
 
 /* ============================
    BREADCRUMB + TITLE

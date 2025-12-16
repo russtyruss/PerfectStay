@@ -39,7 +39,7 @@ export default function CheckoutSummary() {
         navigate("/home");
         return;
       }
-      console.log("✅ Loaded checkout booking:", data);
+      console.log("Loaded checkout booking:", data);
 
       setRoom(data.room);
       setBooking(data.booking);

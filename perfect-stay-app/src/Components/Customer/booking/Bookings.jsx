@@ -19,6 +19,7 @@ export default function Bookings() {
       try {
         setLoading(true);
 
+        //call user for user id first
         const user = JSON.parse(sessionStorage.getItem("user"));
         const customerId = user?.id;
 
@@ -27,10 +28,10 @@ export default function Bookings() {
           return;
         }
 
-        // ⬅ CALL THE NEW ENDPOINT
+        // call bookings with room info endpoint
         const response = await api.get(`/bookings/customer/${customerId}/with-room`);
 
-        // Response is already structured with booking + room info
+        // Response with booking + room info
         setBookings(response.data);
         setFilteredBookings(response.data);
 
@@ -44,7 +45,7 @@ export default function Bookings() {
     fetchBookings();
   }, []);
 
-  
+  // Auto-complete past bookings
   useEffect(() => {
   const syncCompletedBookings = async () => {
     const today = new Date();
@@ -57,12 +58,12 @@ export default function Bookings() {
         b.bookingStatus !== "CANCELLED"
       );
     });
-
+    // Mark each as completed
     for (const booking of completed) {
       try {
         await api.put(`/bookings/mark-completed/${booking.id}`);
 
-        // ✅ Update UI instantly after success
+        // Update UI instantly after success
         setBookings(prev =>
           prev.map(b =>
             b.id === booking.id
