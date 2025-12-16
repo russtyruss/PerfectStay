@@ -174,6 +174,7 @@ public class UserController {
     }
 
 
+    //get points
     @GetMapping("/points/{userId}")
     public ResponseEntity<?> getCustomerPoints(@PathVariable Long userId) {
         Customer customer = customerRepository.findById(userId)
@@ -188,6 +189,7 @@ public class UserController {
 
 
 
+    //redeem points
     @PutMapping("/points/redeem/{userId}")
     public ResponseEntity<?> redeemPoints(
             @PathVariable Long userId,

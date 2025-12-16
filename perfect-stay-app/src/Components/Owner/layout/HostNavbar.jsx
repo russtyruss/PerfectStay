@@ -24,12 +24,12 @@ const HostNavBar = () => {
 
           {/* NAV + LOGOUT */}
           <nav className={styles.nav}>
-            {/* HOME → Owner Dashboard */}
+            {/* HOME Owner Dashboard */}
             <Link to="/owner/owner-dashboard" className={styles.navLink}>
               Home
             </Link>
 
-            {/* PROFILE → Customer Profile Route */}
+            {/* PROFILE Customer Profile Route */}
             <Link to="/owner/profile" className={styles.navLink}>
               Profile
             </Link>
@@ -47,7 +47,7 @@ const HostNavBar = () => {
         </div>
       </header>
 
-      {/* ✅ OUTLET FOR DASHBOARD PAGES */}
+      {/* OUTLET FOR DASHBOARD PAGES */}
       <main className={styles.content}>
         <Outlet />
       </main>

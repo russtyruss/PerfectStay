@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Landing from './Components/Owner/landing/Landing'
 import Login from './Components/Login';
 import Register from './Components/Register';
@@ -20,10 +20,11 @@ import BookingSessionCleaner from './Components/BookingSessionCleaner';
 import HostNavBar from './Components/Owner/layout/HostNavbar';
 import OwnerProfile from './Components/Owner/profile/OwnerProfile';
 import ProtectedRoute from './Components/ProtectedRoute';
+import BookingFlowGuard from './Components/BookingFlowGaurd';
 
 export default function PerfectStay() {
   return (
-    <Router>
+    <BrowserRouter>
         <BookingSessionCleaner /> 
       <Routes>
         <Route path="/" element={<Landing />} />
@@ -49,13 +50,15 @@ export default function PerfectStay() {
             <Route path="room/:id" element={<Room />} />
             <Route path="bookings" element={<Bookings />}/>
             <Route path="booking-summary"  element={<BookingSummary/>}/>
+          <Route element={<BookingFlowGuard />}>
+            <Route path="checkout-summary"  element={<CheckoutSummary/>}/>
             <Route path="checkout" element={<Checkout />} />
             <Route path="booking-success"  element={<BookingSucces/>}/>
+          </Route>
             <Route path="profile"  element={<Profile/>}/>
-            <Route path="checkout-summary"  element={<CheckoutSummary/>}/>
           </Route>
         </Route>
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }

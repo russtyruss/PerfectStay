@@ -9,7 +9,7 @@ public class RecommendedHotelDTO {
     private String location;
     private List<String> images;
     private Double lowestPrice;
-    private String cheapestRoomImage; // ADD THIS
+    private String cheapestRoomImage; 
     private String city;
 
     public RecommendedHotelDTO(
@@ -18,7 +18,7 @@ public class RecommendedHotelDTO {
             String location,
             List<String> images,
             Double lowestPrice,
-            String cheapestRoomImage,     // ADD THIS
+            String cheapestRoomImage,     
             String city
     ) {
         this.hotelId = hotelId;
@@ -26,7 +26,7 @@ public class RecommendedHotelDTO {
         this.location = location;
         this.images = images;
         this.lowestPrice = lowestPrice;
-        this.cheapestRoomImage = cheapestRoomImage; // ADD THIS
+        this.cheapestRoomImage = cheapestRoomImage;
         this.city = city;
     }
 

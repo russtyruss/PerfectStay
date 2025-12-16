@@ -13,23 +13,18 @@ const HostDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [showAddHotelModal, setShowAddHotelModal] = useState(false);
 
-  const [stats, setStats] = useState({
-    totalHotels: 0,
-    totalRooms: 0,
-  });
-
   const [user] = useState(() =>
     JSON.parse(sessionStorage.getItem("user"))
   );
 
-  // ✅ SECURITY CHECK
+  // SECURITY CHECK
   useEffect(() => {
     if (!user || user.userType !== "HOTEL_OWNER") {
       navigate("/login");
     }
   }, [user, navigate]);
 
-  // ✅ FETCH OWNER HOTELS
+  // FETCH OWNER HOTELS
   useEffect(() => {
     if (!user?.id) return;
 
@@ -40,15 +35,6 @@ const HostDashboard = () => {
         setHotels(res.data);
         setLoading(false);
 
-        // ✅ AUTO DASHBOARD STATS
-        const totalRooms = res.data.reduce(
-          (sum, h) => sum + (h.rooms?.length || 0), 0
-        );
-
-        setStats({
-          totalHotels: res.data.length,
-          totalRooms,
-        });
 
       })
       .catch((err) => {
@@ -59,7 +45,7 @@ const HostDashboard = () => {
 
   }, [user?.id]);
 
-  // ✅ REFETCH AFTER ADD
+  // REFETCH AFTER ADD
   const refetchHotels = () => {
     api.get(`/hotels/all-hotels/${user.id}`)
       .then(res => setHotels(res.data))
@@ -83,19 +69,6 @@ const HostDashboard = () => {
 
           </div>
         </header>
-
-        {/* STATS */}
-        <div className={styles["stats-section"]}>
-          <div className={styles["stat-card"]}>
-            <span>Total Hotels</span>
-            <h2>{stats.totalHotels}</h2>
-          </div>
-
-          <div className={styles["stat-card"]}>
-            <span>Total Rooms</span>
-            <h2>{stats.totalRooms}</h2>
-          </div>
-        </div>
 
         {/* TABS */}
         <div className={styles["tabs-section"]}>

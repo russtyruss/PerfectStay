@@ -32,6 +32,8 @@ public class HotelController {
         this.hotelService = hotelService;
     }
 
+    //postman controller methods
+
     @GetMapping
         public List<Hotel> getAll() {
             return hotelService.getAll();
@@ -47,6 +49,7 @@ public class HotelController {
         return hotelService.create(hotel);
     }
 
+    //used controllers in frontend
     //edit hotel
     @PutMapping("/hotel-edit/{id}")
     public Hotel update(

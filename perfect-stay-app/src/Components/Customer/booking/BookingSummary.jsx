@@ -7,10 +7,11 @@ import api from '../../../api/axios';
 export default function BookingSummary() {
   const [room, setRoom] = useState(null);
   const { state } = useLocation();
-  const booking = state?.booking;
-  
+  const [booking, setBooking] = useState(state?.booking);
+  const [cancelLoading, setCancelLoading] = useState(false);
 
   const navigate = useNavigate();
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
   useEffect(() => {
   if (booking?.room) {
@@ -29,7 +30,11 @@ export default function BookingSummary() {
     });
   };
 
-  const user = JSON.parse(sessionStorage.getItem("user"));
+
+  useEffect(() => {
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    console.log("Logged in user ID:", user?.id);
+    }, []);
   if (!booking || !room) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -42,27 +47,40 @@ export default function BookingSummary() {
   }
 
   const handleCancelBooking = async () => {
-  const confirmCancel = window.confirm("Are you sure you want to cancel this booking?");
-  if (!confirmCancel) return;
+    const confirmCancel = window.confirm("Are you sure you want to cancel this booking?");
+    if (!confirmCancel) return;
 
-  try {
-    await api.put(`/bookings/cancel/${booking.id}`);
+    try {
+      setCancelLoading(true); // START LOADING
 
-    alert("Booking successfully cancelled! Booking refunded");
-    navigate("/home/bookings");
-  } catch (error) {
-    console.error("Cancel failed:", error);
-    alert(error.response?.data || "Failed to cancel booking");
-  }
-};
+      const res = await api.put(`/bookings/cancel/${booking.id}`);
 
+      setBooking(res.data);
+
+      if (booking.bookingStatus === "CONFIRMED") {
+        alert("Booking successfully cancelled! All electronic payments have been refunded. You may check your email for the cancellation confirmation.");
+      } else if (booking.bookingStatus === "PENDING") {
+        alert("Booking successfully cancelled!");
+      }
+
+      navigate("/home/bookings");
+
+    } catch (error) {
+      console.error("Cancel failed:", error);
+      alert(error.response?.data || "Failed to cancel booking");
+    } finally {
+      setCancelLoading(false); // ✅ STOP LOADING NO MATTER WHAT
+    }
+  };
 
   const isCancelDisabled = () => {
     return (
+      cancelLoading ||
       booking.bookingStatus === "COMPLETED" ||
       booking.bookingStatus === "CANCELLED"
     );
   };
+
 
   const getCancelButtonText = () => {
     if (booking.bookingStatus === "COMPLETED") return "Booking Completed";
@@ -308,8 +326,16 @@ export default function BookingSummary() {
             disabled={isCancelDisabled()}
             className={getCancelButtonClasses()}
           >
-            {getCancelButtonText()}
+            {cancelLoading ? (
+              <span className="flex items-center justify-center gap-2">
+                <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                Cancelling...
+              </span>
+            ) : (
+              getCancelButtonText()
+            )}
           </button>
+
 
 
         </div>

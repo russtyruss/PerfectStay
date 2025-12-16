@@ -30,14 +30,14 @@ export default function Room() {
       });
   }, [id]);
 
-  // Handle guest count change
-     // Auto-select first room once hotel loads
+  // Auto-select first room once hotel loads
   useEffect(() => {
     if (hotel?.rooms?.length > 0) {
       setSelectedRoom(hotel.rooms[0]);
     }
   }, [hotel]);
 
+  //handle guest count reset on room change
   useEffect(() => {
     if (selectedRoom) {
       setGuestCount(1); 

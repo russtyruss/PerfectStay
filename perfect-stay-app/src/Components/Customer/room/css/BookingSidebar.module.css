@@ -73,3 +73,17 @@
 .checkBtn:active {
   transform: translateY(1px);
 }
+
+.input[type="number"] {
+  appearance: auto;
+  -webkit-appearance: number-input;
+  -moz-appearance: number-input;
+}
+
+/* Restore arrows for Chrome, Safari, Edge */
+.input[type="number"]::-webkit-inner-spin-button,
+.input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: auto;
+  margin: 0;
+}
+

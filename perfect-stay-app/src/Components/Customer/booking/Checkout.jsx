@@ -12,11 +12,8 @@ export default function Checkout() {
    // eslint-disable-next-line
     const [discountedTotal, setDiscountedTotal] = useState(null);
     const [showPointsModal, setShowPointsModal] = useState(false);
-  // const user = JSON.parse(localStorage.getItem("user"));
-  // const userId = user?.id;
-  // const role = user?.userType;
 
-
+//get logged in user
   useEffect(() => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   console.log("Logged in user ID:", user?.id);
@@ -127,101 +124,102 @@ export default function Checkout() {
   }
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
 
-  if (!validatePayment()) return;
-  setLoading(true);
+    if (!validatePayment()) return;
+    setLoading(true);
 
-  let bookingId = null; // ✅ we need this for rollback
+    let bookingId = null; // ✅ we need this for rollback
 
-  try {
-    const saved = JSON.parse(sessionStorage.getItem("checkoutBooking"));
-    console.log("checkoutBooking data:", saved);
-    if (!saved) throw new Error("No booking in session");
+    try {
+      const saved = JSON.parse(sessionStorage.getItem("checkoutBooking"));
+      console.log("checkoutBooking data:", saved);
+      if (!saved) throw new Error("No booking in session");
 
-    const bookingRequest = {
-      checkInDate: saved.booking.checkInDate,
-      checkOutDate: saved.booking.checkOutDate,
-      totalPrice: saved.booking.totalPrice,
-      numberOfguests: saved.booking.guestCount,
-      bookingStatus: paymentMethod === "cash" ? "PENDING" : "CONFIRMED",
-      customerId: saved.booking.customerId,
-      roomId: saved.booking.roomId,
-      numberOfNights: saved.booking.nights
-    };
+      const bookingRequest = {
+        checkInDate: saved.booking.checkInDate,
+        checkOutDate: saved.booking.checkOutDate,
+        totalPrice: saved.booking.totalPrice,
+        numberOfguests: saved.booking.guestCount,
+        bookingStatus: paymentMethod === "cash" ? "PENDING" : "CONFIRMED",
+        customerId: saved.booking.customerId,
+        roomId: saved.booking.roomId,
+        numberOfNights: saved.booking.nights
+      };
 
-    console.log("SENDING TO BACKEND:", bookingRequest);
+      console.log("SENDING TO BACKEND:", bookingRequest);
 
-    const response = await api.post("/bookings", bookingRequest);
-    bookingId = response.data.id; // ✅ store for rollback
+      const response = await api.post("/bookings", bookingRequest);
+      bookingId = response.data.id; // ✅ store for rollback
 
-    const bookingWithRoomInfo = {
-      ...response.data,
-      room: {
-        roomType: saved.room.roomType,
-        roomId: saved.booking.roomId
+      const bookingWithRoomInfo = {
+        ...response.data,
+        room: {
+          roomType: saved.room.roomType,
+          roomId: saved.booking.roomId
+        }
+      };
+
+      const paymentPayload = {
+        bookingId,
+        amount: saved.booking.totalPrice,
+        paymentMethodType:
+          paymentMethod === "card"
+            ? "CREDIT_CARD"
+            : paymentMethod === "gcash"
+            ? "GCASH"
+            : "CASH",
+
+        cardNumber:
+          paymentMethod === "card"
+            ? paymentData.cardNumber.replace(/\s/g, "")
+            : null,
+
+        expiryDate: paymentMethod === "card" ? paymentData.expiryDate : null,
+        cvv: paymentMethod === "card" ? paymentData.cvv : null,
+
+        gcashNumber:
+          paymentMethod === "gcash" ? paymentData.gcashNumber : null
+      };
+
+      if (paymentMethod !== "cash") {
+        await api.post("/payments/process", paymentPayload);
+        alert("Payment successful! A receipt has been sent to your email.");
       }
-    };
 
-    const paymentPayload = {
-      bookingId,
-      amount: saved.booking.totalPrice,
-      paymentMethodType:
-        paymentMethod === "card"
-          ? "CREDIT_CARD"
-          : paymentMethod === "gcash"
-          ? "GCASH"
-          : "CASH",
+      // ONLY SAVED IF BOTH BOOKING + PAYMENT PASSED
+      sessionStorage.setItem(
+        "confirmedBooking",
+        JSON.stringify(bookingWithRoomInfo)
+      );
 
-      cardNumber:
-        paymentMethod === "card"
-          ? paymentData.cardNumber.replace(/\s/g, "")
-          : null,
+      navigate("/home/booking-success", { replace: true });
 
-      expiryDate: paymentMethod === "card" ? paymentData.expiryDate : null,
-      cvv: paymentMethod === "card" ? paymentData.cvv : null,
+    } catch (err) {
+      console.error("FULL ERROR:", err.response?.data || err.message);
 
-      gcashNumber:
-        paymentMethod === "gcash" ? paymentData.gcashNumber : null
-    };
-
-    if (paymentMethod !== "cash") {
-      await api.post("/payments/process", paymentPayload);
-    }
-
-    // ✅ ONLY SAVED IF BOTH BOOKING + PAYMENT PASSED
-    sessionStorage.setItem(
-      "confirmedBooking",
-      JSON.stringify(bookingWithRoomInfo)
-    );
-
-    navigate("/home/booking-success");
-
-  } catch (err) {
-    console.error("FULL ERROR:", err.response?.data || err.message);
-
-    // ✅ ✅ ✅ ROLLBACK: DELETE BOOKING IF PAYMENT FAILED
-    if (bookingId) {
-      try {
-        await api.delete(`/bookings/safe-delete/${bookingId}`);
-        console.warn("Booking rolled back due to failed payment");
-      } catch (rollbackErr) {
-        console.error("ROLLBACK FAILED:", rollbackErr);
+      // rollback: DELETE BOOKING IF PAYMENT FAILED
+      if (bookingId) {
+        try {
+          await api.delete(`/bookings/safe-delete/${bookingId}`);
+          console.warn("Booking rolled back due to failed payment");
+        } catch (rollbackErr) {
+          console.error("ROLLBACK FAILED:", rollbackErr);
+        }
       }
+
+      setError(
+        err.response?.data?.message ||
+        err.response?.data ||
+        "Payment failed. Booking was not completed."
+      );
+
+    } finally {
+      setLoading(false);
     }
-
-    setError(
-      err.response?.data?.message ||
-      err.response?.data ||
-      "Payment failed. Booking was not completed."
-    );
-
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
     //cancel button
   const handleCancel = () => {
@@ -239,26 +237,26 @@ const handleSubmit = async (e) => {
   };
 
 
-    const handleOpenPoints = () => {
-        setShowPointsModal(true);
-      };
+  const handleOpenPoints = () => {
+      setShowPointsModal(true);
+    };
 
-    const handleRedeemConfirm = (finalPrice) => {
-    setDiscountedTotal(finalPrice);
+  const handleRedeemConfirm = (finalPrice) => {
+  setDiscountedTotal(finalPrice);
 
-    setBooking(prev => ({
-      ...prev,
-      totalPrice: finalPrice
-    }));
+  setBooking(prev => ({
+    ...prev,
+    totalPrice: finalPrice
+  }));
 
-    const saved = sessionStorage.getItem("checkoutBooking");
-    if (saved) {
-      const data = JSON.parse(saved);
-      data.booking.totalPrice = finalPrice;
-      sessionStorage.setItem("checkoutBooking", JSON.stringify(data));
-    }
+  const saved = sessionStorage.getItem("checkoutBooking");
+  if (saved) {
+    const data = JSON.parse(saved);
+    data.booking.totalPrice = finalPrice;
+    sessionStorage.setItem("checkoutBooking", JSON.stringify(data));
+  }
 
-    setShowPointsModal(false);
+  setShowPointsModal(false);
   };
 
 

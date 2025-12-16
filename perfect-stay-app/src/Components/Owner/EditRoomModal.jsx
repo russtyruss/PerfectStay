@@ -103,7 +103,7 @@ export default function EditRoomModal({ roomId, onClose, onUpdated }) {
               className={styles.preview}
             />
           )}
-
+        <p>Image URl</p>
           <input
             name="imageUrl"
             value={room.imageUrl}
@@ -111,7 +111,7 @@ export default function EditRoomModal({ roomId, onClose, onUpdated }) {
             placeholder="Room Image URL"
             className={styles.input}
           />
-
+        <p>Room Type</p>
           <input
             name="roomType"
             value={room.roomType}
@@ -121,6 +121,7 @@ export default function EditRoomModal({ roomId, onClose, onUpdated }) {
             required
           />
 
+        <p>Description</p>
           <textarea
             name="description"
             value={room.description}
@@ -128,7 +129,7 @@ export default function EditRoomModal({ roomId, onClose, onUpdated }) {
             placeholder="Description"
             className={styles.textarea}
           />
-
+        <p>Capacity</p>
           <input
             type="number"
             name="capacity"
@@ -137,7 +138,7 @@ export default function EditRoomModal({ roomId, onClose, onUpdated }) {
             className={styles.input}
             min="1"
           />
-
+        <p>Quantity</p>
           <input
             type="number"
             name="quantity"
@@ -146,7 +147,7 @@ export default function EditRoomModal({ roomId, onClose, onUpdated }) {
             className={styles.input}
             min="1"
           />
-
+        <p>Price Per Night</p>
           <input
             type="number"
             name="pricePerNight"

@@ -64,17 +64,17 @@ public class HotelService {
         Hotel existingHotel = hotelRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Hotel not found"));
 
-        // ✅ OWNER CHECK
+        //  OWNER CHECK
         if (!existingHotel.getHotelOwner().getId().equals(ownerId)) {
             throw new RuntimeException("Unauthorized");
         }
 
-        // ✅ DUPLICATE NAME CHECK
+        //  DUPLICATE NAME CHECK
         if (hotelRepository.existsByNameAndIdNot(updatedHotel.getName(), id)) {
             throw new RuntimeException("A hotel with this name already exists");
         }
 
-        // ✅ UPDATE ONLY SAFE FIELDS
+        // UPDATE ONLY SAFE FIELDS
         existingHotel.setName(updatedHotel.getName());
         existingHotel.setCity(updatedHotel.getCity());
         existingHotel.setAddress(updatedHotel.getAddress());
@@ -192,7 +192,7 @@ public class HotelService {
         HotelOwner owner = hotelOwnerRepository.findById(dto.getHotelOwnerId())
                 .orElseThrow(() -> new RuntimeException("Hotel owner not found"));
 
-        // ✅ 1. Save HOTEL first
+        // Save HOTEL first
         Hotel hotel = new Hotel();
         hotel.setName(dto.getName());
         hotel.setDescription(dto.getDescription());
@@ -203,7 +203,7 @@ public class HotelService {
 
         Hotel savedHotel = hotelRepository.save(hotel);
 
-        // ✅ 2. Save ROOMS
+        // Save ROOMS
         for (RoomDTO roomDTO : dto.getRooms()) {
 
             Room room = new Room();
@@ -217,7 +217,7 @@ public class HotelService {
 
             Room savedRoom = roomRepository.save(room);
 
-            // ✅ 3. Save ROOM IMAGES
+            //Save ROOM IMAGES
             if (roomDTO.getImages() != null && !roomDTO.getImages().isEmpty()) {
                 List<RoomImage> images = roomDTO.getImages().stream().map(url -> {
                     RoomImage image = new RoomImage();
@@ -241,7 +241,7 @@ public class HotelService {
 
     return hotels.stream().map(hotel -> {
 
-        // ✅ Sort rooms cheapest → expensive
+        // Sort rooms cheapest → expensive
         List<RoomDTO> rooms = hotel.getRooms().stream()
                 .sorted(Comparator.comparing(Room::getPricePerNight))
                 .map(room -> {
